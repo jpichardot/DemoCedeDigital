@@ -1,0 +1,86 @@
+﻿@page
+@model DemoCedeDigital.Pages.LoginModel
+@{
+}
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login - DemoCedeDigital</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="images/logo_banorte_movil.png">
+    <link rel="shortcut icon" href="images/logo_banorte_movil.png">
+
+    <link rel="stylesheet" href="css/lib/normalize/normalize.min.css">
+    <link rel="stylesheet" href="css/lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="css/lib/flag-icon/flag-icon.css">
+    <link rel="stylesheet" href="css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href='css/lib/fonts/fonts.css' rel='stylesheet' type='text/css'>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+</head>
+<body class="bg-light">
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-logo">
+                    <a href="index.html">
+                        <img class="align-content" src="images/logo_banorte.png" alt="">
+                    </a>
+                </div>
+                <br />
+                <h2 class="form-group">Certificado de depósito electrónico.</h2>
+                <br />
+                <br />
+                <div class="login-form">
+                    <form>
+                        <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            <input id="inputEmailId" type="email" class="form-control" placeholder="Correo Electrónico">
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="password" class="form-control" placeholder="Contraseña">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Recuerdame
+                            </label>
+                            <label class="pull-right">
+                                <a href="#">¿Olvidó su contraseña?</a>
+                            </label>
+
+                        </div>
+                        <a href="~/" class="btn btn-success btn-flat m-b-30 m-t-30" onclick="funcIniciarSesion()">Iniciar Sesión</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="js/lib/popper/popper.min.js"></script>
+    <script src="~/js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="~/js/lib/jQuery/jquery.matchHeight.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="~/js/lib/Site/login.js"></script>
+</body>
+</html >

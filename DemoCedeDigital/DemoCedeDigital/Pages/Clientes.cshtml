@@ -1,0 +1,370 @@
+﻿@page
+@{
+    Layout = "_Layout";
+}
+@{
+    ViewData["Title"] = "Cliente";
+}
+
+<head>
+    <link rel="stylesheet" href="css/lib/datatable/dataTables.bootstrap.min.css">
+</head>
+
+<div id="right-panel" class="right-panel">
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Listado de clientes</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="~/">Inicio</a></li>
+                                <li class="active">Clientes</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Clientes</strong>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" onclick="showFiltros()" class="btn btn-dark btn-sm" style="float:right"><i class="fa fa-filter"></i> Filtros</button>
+                            <br />
+                            <br />
+                            <div id="divFiltros" style="display:none">
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label for="inputCliente">Razón Social/Nombre</label>
+                                        <input type="text" class="form-control" id="inputCliente" placeholder="Razón Social/Nombre">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="selectEstatus">Estatus</label>
+                                        <select id="selectEstatus" class="form-control">
+                                            <option value="0">Seleccione una opción</option>
+                                            <option value="Activo">Activo</option>
+                                            <option value="Bloqueado">Bloqueado</option>
+                                            <option value="Baja">Baja</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="inputFechaInicio">Fecha de inicio</label>
+                                        <input type="date" class="form-control" id="inputFechaInicio" placeholder="Fecha de inicio">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="inputFechaFin">Fecha de fin</label>
+                                        <input type="date" class="form-control" id="inputFechaFin" placeholder="Fecha de fin">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-stats order-table ov-h">
+                                <table id="datatableExample" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>No. Cliente</th>
+                                            <th>RFC</th>
+                                            <th>CURP</th>
+                                            <th>Razón Social/Nombre</th>
+                                            <th>Municipio</th>
+                                            <th>Estado</th>
+                                            <th>Fecha Alta</th>
+                                            <th>Estatus</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>C00000001</td>
+                                            <td>RURJ811223E43</td>
+                                            <td>BADD110301HCMLNS04</td>
+                                            <td>Sofía Hernández</td>
+                                            <td>Asientos</td>
+                                            <td>Aguascalientes</td>
+                                            <td>25-07-2020</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Activo</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000002</td>
+                                            <td>POGA750119T87</td>
+                                            <td>BADD110301HCMLNS05</td>
+                                            <td>Santiago García</td>
+                                            <td>Toluca</td>
+                                            <td>Estado de México</td>
+                                            <td>25-07-2021</td>
+                                            <td>
+                                                <span class="badge badge-danger w-100">Bloqueado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000003</td>
+                                            <td>SARR710313598</td>
+                                            <td>BADD110301HCMLNS05</td>
+                                            <td>Valentina Martínez</td>
+                                            <td>Monterrey</td>
+                                            <td>Nuevo León</td>
+                                            <td>25-05-2020</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Activo</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000004</td>
+                                            <td>LAN8507268IA</td>
+                                            <td></td>
+                                            <td>Almacenadoras del Norte SA de CV</td>
+                                            <td>Hermosillo</td>
+                                            <td>Sonora</td>
+                                            <td>25-01-2021</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000005</td>
+                                            <td>LAN7008173R5</td>
+                                            <td></td>
+                                            <td>CompuEmpresa</td>
+                                            <td>Xalapa</td>
+                                            <td>Veracruz</td>
+                                            <td>10-07-2020</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000006</td>
+                                            <td>FLGV800823AD8</td>
+                                            <td>BADD110301HCMLNS06</td>
+                                            <td>Mateo López</td>
+                                            <td>Toluca</td>
+                                            <td>Mexico</td>
+                                            <td>10-07-2021</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Activo</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000007</td>
+                                            <td>VEGL861115AY4</td>
+                                            <td>BADD110301HCMLNS07</td>
+                                            <td>Regina González</td>
+                                            <td>La Paz</td>
+                                            <td>Baja California Sur</td>
+                                            <td>25-07-2009</td>
+                                            <td>
+                                                <span class="badge badge-danger w-100">Bloqueado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000008</td>
+                                            <td>VOC990129I26</td>
+                                            <td></td>
+                                            <td>Productos Enlatados Costeños SA de CV</td>
+                                            <td>Mérida</td>
+                                            <td>Yucatán</td>
+                                            <td>15-03-2020</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Activo</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000009</td>
+                                            <td>URU070122S28</td>
+                                            <td></td>
+                                            <td>Cervezas Duff SA de CV</td>
+                                            <td>Reynosa</td>
+                                            <td>Tamaulipas</td>
+                                            <td>29-06-2018</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000010</td>
+                                            <td>BERS870523A70</td>
+                                            <td>BADD110301HCMLNS08</td>
+                                            <td>Sebastián Pérez</td>
+                                            <td>Cholula</td>
+                                            <td>Puebla</td>
+                                            <td>12-03-2021</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Activo</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000011</td>
+                                            <td>GOAP780710RH7</td>
+                                            <td>BADD110301HCMLNS09</td>
+                                            <td>Ximena Rodríguez</td>
+                                            <td>Pachuca de Soto</td>
+                                            <td>Hidalgo</td>
+                                            <td>25-02-2021</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Activo</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000012</td>
+                                            <td>POGA750119T87</td>
+                                            <td>BADD110301HCMLNS00</td>
+                                            <td>Emiliano Sánchez</td>
+                                            <td>Acapulco</td>
+                                            <td>Guerrero</td>
+                                            <td>11-02-2020</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Activo</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000013</td>
+                                            <td>ULC051129GC0</td>
+                                            <td></td>
+                                            <td>Akarian Tecnologías</td>
+                                            <td>Torreón</td>
+                                            <td>Coahuila de Zaragoza</td>
+                                            <td>22-09-2020</td>
+                                            <td>
+                                                <span class="badge badge-danger w-100">Bloqueado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000014</td>
+                                            <td>TME960709LR2</td>
+                                            <td></td>
+                                            <td>Industrias Shanks</td>
+                                            <td>Guadalajara</td>
+                                            <td>Jalisco</td>
+                                            <td>29-07-2020</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Activo</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>C00000015</td>
+                                            <td>VEGL861115AY4</td>
+                                            <td>BADD110301HCMLNS01</td>
+                                            <td>Fernanda Ramírez</td>
+                                            <td>León</td>
+                                            <td>Guanajuato</td>
+                                            <td>21-12-2021</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                                <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Desbloquear"><i class="fa fa-unlock"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .animated -->
+    </div>
+
+    <div class="clearfix"></div>
+
+    <script src="js/lib/data-table/datatables.min.js"></script>
+    <script src="js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="js/lib/data-table/jszip.min.js"></script>
+    <script src="js/lib/data-table/vfs_fonts.js"></script>
+    <script src="js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="js/lib/data-table/buttons.print.min.js"></script>
+    <script src="js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="~/js/lib/data-table/dataTables.dateTime.min.js"></script>
+    <script src="js/init/datatables-init.js"></script>
+    <script src="~/js/lib/Site/clientes.js"></script>
+</div>

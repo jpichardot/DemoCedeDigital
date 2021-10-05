@@ -1,0 +1,381 @@
+﻿@page
+@{
+    Layout = "_Layout";
+}
+@{
+    ViewData["Title"] = "Actas de inspección";
+}
+
+<head>
+    <link rel="stylesheet" href="css/lib/datatable/dataTables.bootstrap.min.css">
+
+    <style>
+        .loader {
+          font-size: 10px;
+          margin: 50px auto;
+          text-indent: -9999em;
+          width: 11em;
+          height: 11em;
+          border-radius: 50%;
+          background: #ff0000;
+          background: -moz-linear-gradient(left, #ff0000 10%, rgba(255,0,0, 0) 42%);
+          background: -webkit-linear-gradient(left, #ff0000 10%, rgba(255,0,0, 0) 42%);
+          background: -o-linear-gradient(left, #ff0000 10%, rgba(255,0,0, 0) 42%);
+          background: -ms-linear-gradient(left, #ff0000 10%, rgba(255,0,0, 0) 42%);
+          background: linear-gradient(to right, #ff0000 10%, rgba(255,0,0, 0) 42%);
+          position: relative;
+          -webkit-animation: load3 1.4s infinite linear;
+          animation: load3 1.4s infinite linear;
+          -webkit-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          transform: translateZ(0);
+        }
+        .loader:before {
+          width: 50%;
+          height: 50%;
+          background: #ff0000;
+          border-radius: 100% 0 0 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          content: '';
+        }
+        .loader:after {
+          background: #ffffff;
+          width: 75%;
+          height: 75%;
+          border-radius: 50%;
+          content: '';
+          margin: auto;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+        }
+        @@-webkit-keyframes load3 {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+        @@keyframes load3 {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+    </style>
+</head>
+
+<div id="right-panel" class="right-panel">
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Listado de actas de inspección</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="~/">Inicio</a></li>
+                                <li class="active">Actas de inspección</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Actas de inspección</strong>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" onclick="showFiltros()" class="btn btn-dark btn-sm" style="float:right"><i class="fa fa-filter"></i> Filtros</button>
+                            <br />
+                            <br />
+                            <div id="divFiltros" style="display:none">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="selectEstatus">Estatus</label>
+                                        <select id="selectEstatus" class="form-control">
+                                            <option value="0">Seleccione una opción</option>
+                                            <option value="Autorizado">Autorizado</option>
+                                            <option value="Baja">Baja</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputFechaInicio">Fecha de inicio</label>
+                                        <input type="date" class="form-control" id="inputFechaInicio" placeholder="Fecha de inicio">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputFechaFin">Fecha de fin</label>
+                                        <input type="date" class="form-control" id="inputFechaFin" placeholder="Fecha de fin">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-stats order-table ov-h">
+                                <table id="datatableExample" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Folio</th>
+                                            <th>Producto</th>
+                                            <th>Fecha de Expedición</th>
+                                            <th>Hash de Transacción</th>
+                                            <th>Estatus</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>F1500001</td>
+                                            <td>Maíz amarillo</td>
+                                            <td>25-07-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500002</td>
+                                            <td>Mango ataulfo</td>
+                                            <td>25-07-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500003</td>
+                                            <td>Manzana criolla</td>
+                                            <td>25-05-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500004</td>
+                                            <td>Lechuga romana</td>
+                                            <td>25-01-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500005</td>
+                                            <td>Melon gota de miel</td>
+                                            <td>10-07-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500006</td>
+                                            <td>Miel</td>
+                                            <td>10-07-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500007</td>
+                                            <td>Maíz Blanco</td>
+                                            <td>25-07-2009</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500008</td>
+                                            <td>Nabo</td>
+                                            <td>15-03-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500009</td>
+                                            <td>Naranja criolla</td>
+                                            <td>29-06-2018</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500010</td>
+                                            <td>Nopal</td>
+                                            <td>12-03-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500011</td>
+                                            <td>Nuez de castilla</td>
+                                            <td>25-02-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500012</td>
+                                            <td>Papa blanca</td>
+                                            <td>11-02-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500013</td>
+                                            <td>Papaya hawaiana</td>
+                                            <td>22-09-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500014</td>
+                                            <td>Pepino chino</td>
+                                            <td>29-07-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500015</td>
+                                            <td>Pimienta negra</td>
+                                            <td>21-12-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm btnNewSoliEmi" data-toggle="tooltip" data-placement="top" title="Nueva solicitud de emisión"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade show" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" style="display: none; padding-left: 17px;">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="smallmodalLabel">Verificando en buro Aagede</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="loader">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .animated -->
+    </div>
+
+    <div class="clearfix"></div>
+
+    <script src="js/lib/data-table/datatables.min.js"></script>
+    <script src="js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="js/lib/data-table/jszip.min.js"></script>
+    <script src="js/lib/data-table/vfs_fonts.js"></script>
+    <script src="js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="js/lib/data-table/buttons.print.min.js"></script>
+    <script src="js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="~/js/lib/data-table/dataTables.dateTime.min.js"></script>
+    <script src="js/init/datatables-init.js"></script>
+    <script src="~/js/lib/Site/actas_inspeccion_cliente.js"></script>
+</div>

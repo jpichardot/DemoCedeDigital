@@ -1,0 +1,368 @@
+﻿@page
+@{
+    Layout = "_Layout";
+}
+@{
+    ViewData["Title"] = "Actas de inspección";
+}
+
+<head>
+    <link rel="stylesheet" href="css/lib/datatable/dataTables.bootstrap.min.css">
+</head>
+
+<div id="right-panel" class="right-panel">
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Listado de actas de inspección</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="~/">Inicio</a></li>
+                                <li class="active">Actas de inspección</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Actas de inspección</strong>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" onclick="showFiltros()" class="btn btn-dark btn-sm" style="float:right"><i class="fa fa-filter"></i> Filtros</button>
+                            <br />
+                            <br />
+                            <div id="divFiltros" style="display:none">
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label for="inputCliente">Cliente</label>
+                                        <input type="text" class="form-control" id="inputCliente" placeholder="Cliente">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="selectEstatus">Estatus</label>
+                                        <select id="selectEstatus" class="form-control">
+                                            <option value="0">Seleccione una opción</option>
+                                            <option value="Autorizado">Autorizado</option>
+                                            <option value="Baja">Baja</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="inputFechaInicio">Fecha de inicio</label>
+                                        <input type="date" class="form-control" id="inputFechaInicio" placeholder="Fecha de inicio">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="inputFechaFin">Fecha de fin</label>
+                                        <input type="date" class="form-control" id="inputFechaFin" placeholder="Fecha de fin">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-stats order-table ov-h">
+                                <table id="datatableExample" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Folio</th>
+                                            <th>Cliente</th>
+                                            <th>Producto</th>
+                                            <th>Fecha de Expedición</th>
+                                            <th>Hash de Transacción</th>
+                                            <th>Estatus</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>F1500001</td>
+                                            <td>Sofía Hernández</td>
+                                            <td>Maíz amarillo</td>
+                                            <td>25-07-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <!--<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+    <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+    -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500002</td>
+                                            <td>Santiago García</td>
+                                            <td>Mango ataulfo</td>
+                                            <td>25-07-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <!--<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500003</td>
+                                            <td>Valentina Martínez</td>
+                                            <td>Manzana criolla</td>
+                                            <td>25-05-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <!--
+    <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+    <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+        -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500004</td>
+                                            <td>Mateo López</td>
+                                            <td>Lechuga romana</td>
+                                            <td>25-01-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td>
+                                                <!--<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500005</td>
+                                            <td>Regina González</td>
+                                            <td>Melon gota de miel</td>
+                                            <td>10-07-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td><!--
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500006</td>
+                                            <td>Sebastián Pérez</td>
+                                            <td>Miel</td>
+                                            <td>10-07-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td><!--
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500007</td>
+                                            <td>Ximena Rodríguez</td>
+                                            <td>Maíz Blanco</td>
+                                            <td>25-07-2009</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td><!--
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500008</td>
+                                            <td>Emiliano Sánchez</td>
+                                            <td>Nabo</td>
+                                            <td>15-03-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td><!--
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500009</td>
+                                            <td>Fernanda Ramírez</td>
+                                            <td>Naranja criolla</td>
+                                            <td>29-06-2018</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td><!--
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500010</td>
+                                            <td>Diego Cruz</td>
+                                            <td>Nopal</td>
+                                            <td>12-03-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td><!--
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500011</td>
+                                            <td>Valeria Flores</td>
+                                            <td>Nuez de castilla</td>
+                                            <td>25-02-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-dark w-100" style="background-color:darkred; border-color:darkred">Baja</span>
+                                            </td>
+                                            <td><!--
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500012</td>
+                                            <td>Daniel Gómez</td>
+                                            <td>Papa blanca</td>
+                                            <td>11-02-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td><!--
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500013</td>
+                                            <td>Victoria Álvarez</td>
+                                            <td>Papaya hawaiana</td>
+                                            <td>22-09-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td><!--
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500014</td>
+                                            <td>Alejandro Orozco</td>
+                                            <td>Pepino chino</td>
+                                            <td>29-07-2020</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td><!--
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1500015</td>
+                                            <td>Renata Herrera</td>
+                                            <td>Pimienta negra</td>
+                                            <td>21-12-2021</td>
+                                            <td>0xB3F0725999B7a16516235A709D8b1c871370eb42</td>
+                                            <td>
+                                                <span class="badge badge-success w-100">Autorizado</span>
+                                            </td>
+                                            <td><!--
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Rechazar"><i class="fa fa-times"></i></button>
+                                                -->
+                                                <button type="button" class="btn btn-danger btn-sm" style="background-color:darkred; border-color:darkred" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .animated -->
+    </div>
+
+    <div class="clearfix"></div>
+
+    <script src="js/lib/data-table/datatables.min.js"></script>
+    <script src="js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="js/lib/data-table/jszip.min.js"></script>
+    <script src="js/lib/data-table/vfs_fonts.js"></script>
+    <script src="js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="js/lib/data-table/buttons.print.min.js"></script>
+    <script src="js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="~/js/lib/data-table/dataTables.dateTime.min.js"></script>
+    <script src="js/init/datatables-init.js"></script>
+    <script src="~/js/lib/Site/actas_inspeccion_almacenadora.js"></script>
+</div>

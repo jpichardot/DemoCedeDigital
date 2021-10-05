@@ -1,0 +1,1022 @@
+﻿@page
+@{
+    Layout = "_Layout";
+}
+@{
+    ViewData["Title"] = "Ver solicitud de emisión";
+}
+
+<head>
+    <style>
+        .row {
+            margin: 5px 1px;
+        }
+
+        .popover {
+            max-width: 90% !important;
+        }
+    </style>
+</head>
+
+<div id="right-panel" class="right-panel">
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Ver solicitud de emisión</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="~/">Inicio</a></li>
+                                <li><a href="SolicitudesEmisionAlm">Solicitudes de emisión</a></li>
+                                <li class="active">Ver</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popoverExampleTwoHiddenContent" style="display: none">
+        <div>
+            <div class="col-md-12">
+                <table id="tableTransaccionesBlockchain" style="border: hidden; width:200px">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label style="float: left;">Autorizado</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label id="fechaBlockchain" style="float: right; color: green;">26-07-2021 - 13:00</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p title="Hash de transacción" style="font-size: 11.8px; cursor: pointer; text-decoration: underline; color: blue;" onclick="verDatoGeneral()">0x7eae03465e15ae4asd8da45bde2d5489b9b5d1c65a8e654bfa85d524a56e54she</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label style="float: left;">Pendiente</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label id="fechaBlockchain" style="float: right; color: green;">23-07-2021 - 14:00</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p title="Hash de transacción" style="font-size: 11.8px; cursor: pointer; text-decoration: underline; color: blue;" onclick="verDatoGeneral()">0x7eae01955e15ae456e8da45bde2d5489b9b5d1c65a8e654bfa85d524a56e85dac</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Popover 2 hidden title -->
+    <div id="popoverExampleTwoHiddenTitle" style="display: none; width:500px">
+        <h4>Historial transacciones</h4>
+    </div>
+
+    <div class="content">
+        <div class="card">
+            <div class="card-header">
+                <b class="card-title">Solicitud de emisión de certificados</b>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <h4>Estatus:&nbsp;</h4>
+                    <h4 class="text-success"><b><span class="badge badge-success w-100">Enviado a aprobación.</span></b></h4>
+                </div>
+                <div class="row"></div>
+                <div class="row">
+                    <h4>Hash de transacción: </h4>
+                    <h4 class="text-primary" id="popoverExampleTwo" href="#"><b> &nbsp;<u>0x7eae01955e15ae456e8da45bde2d5489b9b5d1c65a8e654bfa85d524a56e85dac</u></b></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="default-tab">
+
+                <nav>
+                    <div id="tabSoliEmision" class="nav nav-tabs" role="tablist">
+                        <a id="aSolicitud" class="nav-item nav-link active" data-toggle="tab" href="#custom-nav-solicitud" role="tab" aria-controls="custom-nav-solicitud" aria-selected="true">Solicitud</a>
+                        <a id="aProducto" class="nav-item nav-link" data-toggle="tab" href="#custom-nav-producto" role="tab" aria-controls="custom-nav-producto" aria-selected="false">Producto</a>
+                        <a id="aPoliza" class="nav-item nav-link" data-toggle="tab" href="#custom-nav-poliza" role="tab" aria-controls="custom-nav-poliza" aria-selected="false">Póliza y cobertura</a>
+                        <a id="aAutorizacion" class="nav-item nav-link" data-toggle="tab" href="#custom-nav-autorizacion" role="tab" aria-controls="custom-nav-autorizacion" aria-selected="false" style="display:none">Autorización y rechazo</a>
+                    </div>
+                </nav>
+                <div class="tab-content pt-2" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="custom-nav-solicitud" role="tabpanel" aria-labelledby="custom-nav-solicitud-tab">
+                        <div class="card">
+                            <div class="card-header"><b>Solicitud</b></div>
+                            <div class="card-body card-block">
+                                <div class="row">
+                                    <div class="col-3"></div>
+                                    <div class="col-3"></div>
+                                    <div class="col-3"></div>
+                                    <div class="col-3">
+                                        <div class="row float-right">
+                                            <h3 style="float:right">FOLIO:&nbsp;</h3>
+                                            <h3 style="float:right"><b>F00000000X</b></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="row form-group">
+                                            <label for="inputClienteSoli" class="form-control-label">Cliente:</label>
+                                            <input type="text" id="inputClienteSoli" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <br />
+                                        <div class="row form-group">
+                                            <div class="col col-md-12">
+                                                <div class="form-check">
+                                                    <div class="radio">
+                                                        <label for="radioBodegaPropia" class="form-check-label ">
+                                                            <input type="radio" id="radioBodegaPropia" name="radioTipoBodega" value="Propia" class="form-check-input" checked readonly>Bodega Propia
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label for="radioBodegaHabilitada" class="form-check-label ">
+                                                            <input type="radio" id="radioBodegaHabilitada" name="radioTipoBodega" value="Habilitada" class="form-check-input" readonly>Bodega Habilitada
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="row form-group">
+                                            <label class=" form-control-label">Dirección:&nbsp;</label>
+                                            <p class="form-control-static" id="direccionPSoli"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row form-group">
+                                            <label class=" form-control-label">RFC:&nbsp;</label>
+                                            <p class="form-control-static" id="RFCPSoli"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row form-group">
+                                            <label for="selectEstadoSoli" class="form-control-label">Estado:</label>
+                                            <select name="selectEstadoSoli" id="selectEstadoSoli" class="form-control" disabled>
+                                                <option value="0">Seleccione una opción</option>
+                                                <option value="1" selected>Aguascalientes</option>
+                                                <option value="2">Baja California</option>
+                                                <option value="3">Baja California Sur</option>
+                                                <option value="4">Campeche</option>
+                                                <option value="5">Chihuahua</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-3">
+                                        <div class="row form-group">
+                                            <label for="inputCliente" class="form-control-label">Fecha:</label>
+                                            <input type="date" id="inputFechaSoli" value="2021-07-25" data-date-format="DD-MM-YYYY" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="row form-group">
+                                            <label for="inputCliente" class="form-control-label">Hora:</label>
+                                            <input type="time" id="inputHoraSoli" class="form-control" value="13:30" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row form-group">
+                                            <div class="form-check">
+                                                <div class="checkbox">
+                                                    <label for="PolizaSoli1" class="form-check-label ">
+                                                        <input type="checkbox" id="PolizaSoli1" checked name="PolizaSoli1" value="PolizaSoli1Check" class="form-check-input" readonly>En base al contrato que tenemos celebrando; el depositante manifiesta sobre la mercancia que amparen los títulos de crédito que no ha sido ni será inscrito en el Registro Único de Garantías Mobiliarias, durante la vigencia de los mismo. El depositante manifiesta sobre sus mercancias lo siguiente:
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="row form-group">
+                                            <label for="selectNombreAlmacenSoli" class="form-control-label">Almacén propio:</label>
+                                            <select name="selectNombreAlmacenSoli" id="selectNombreAlmacenSoli" class="form-control" disabled>
+                                                <option value="0">Seleccione una opción</option>
+                                                <option value="1" selected>Almacén 1</option>
+                                                <option value="2">Almacén 2</option>
+                                                <option value="3">Almacén 3</option>
+                                                <option value="4">Almacén 4</option>
+                                                <option value="5">Almacén 5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row form-group">
+                                            <label for="inputDireccionAlmacenSoli" class="form-control-label">Dirección:</label>
+                                            <div class="col-12 col-md-12">
+                                                <p class="form-control-static">AV. FRANCISCO I. MADERO COL. CENTRO</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row form-group">
+                                            <label for="inputGrupoAlmacenSoli" class="form-control-label">Grupo de bodega:</label>
+                                            <input type="text" id="inputGrupoAlmacenSoli" placeholder="AXXX" class="form-control" value="A100" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="row form-group">
+                                            <label for="selectTpSolicitud" class="form-control-label">Tipo de solicitud:</label>
+                                            <select name="selectTpSolicitud" id="selectTpSolicitud" class="form-control" onchange="showCedeSust()" disabled>
+                                                <option value="0">Seleccione una opción</option>
+                                                <option value="1" selected>Emisíon</option>
+                                                <option value="2">Sustitución</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div id="divCedeSust" class="col-4" style="display:none">
+                                        <div class="row form-group">
+                                            <label for="selectCEDEsust" class="form-control-label">Certificado a sustituir:</label>
+                                            <select name="selectCEDEsust" id="selectCEDEsust" class="form-control">
+                                                <option value="0">Seleccione una opción</option>
+                                                <option value="1">CDX00000001</option>
+                                                <option value="2">CDX00000002</option>
+                                                <option value="3">CDX00000003</option>
+                                                <option value="4">CDX00000004</option>
+                                                <option value="5">CDX00000005</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="row form-group">
+                                            <label for="inputContratoSoli" class="form-control-label">Contrato:</label>
+                                            <input type="text" id="inputContratoSoli" placeholder="Contrato" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row form-group">
+                                            <label for="inputFechaInicioSoli" class="form-control-label">Fecha inicio:</label>
+                                            <input type="date" id="inputFechaInicioSoli" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row form-group">
+                                            <label for="inputFechaFinSoli" class="form-control-label">Fecha fin:</label>
+                                            <input type="date" id="inputFechaFinSoli" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="custom-nav-producto" role="tabpanel" aria-labelledby="custom-nav-producto-tab">
+                        <div class="card">
+                            <div class="card-header"><b>Producto</b></div>
+                            <div class="card-body card-block">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row form-group">
+                                            <div class="form-check">
+                                                <div class="checkbox">
+                                                    <label for="PolizaPro1" class="form-check-label ">
+                                                        <input type="checkbox" id="PolizaPro1" name="PolizaPro1" value="PolizaPro1Check" class="form-check-input" checked readonly>Se solicita se realice la inspección necesaria para verificar la existencia fisica almacenada, que permita la emisión de certificados de depósito amparado lo siguiente de conformidad con el artículo 11 Bis 1 de la Ley General de Organizaciones y Actividades Auxiliares del Crédito.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row form-group">
+                                            <label for="selectProductoPro" class="form-control-label">Producto:</label>
+                                            <select name="selectProductoPro" id="selectProductoPro" class="form-control" disabled>
+                                                <option value="0">Seleccione una opción</option>
+                                                <option value="1" selected>MAIZ GRANO</option>
+                                                <option value="2">FRIJOL</option>
+                                                <option value="3">HABA GRANO</option>
+                                                <option value="4">FRESA</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row form-group">
+                                            <label for="inputDescAdPro" class="form-control-label">Descripción adicional:</label>
+                                            <input type="text" id="inputDescAdPro" placeholder="Descripción del producto de prueba 1" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <div class="row form-group">
+                                            <label class="form-control-label">Se trata de producto básico y estratégico de conformidad con lo establecido por el artículo 179 de la Ley de Desarrollo Rural Sustentable</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <select name="selectTpSolicitud" id="selectTpSolicitud" class="form-control" disabled>
+                                            <option value="0">Seleccione una opción</option>
+                                            <option value="1" selected>SI</option>
+                                            <option value="2">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="row form-group">
+                                            <label class="form-control-label">El producto que se certifica es propiedad de: </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="form-check-inline form-check">
+                                            <label for="inline-radio1" class="form-check-label ">
+                                                <input type="radio" id="inline-radio1" name="inline-radios" value="option1" class="form-check-input" checked readonly><span class="badge badge-success">Depositante</span>
+                                            </label>
+                                            <label for="inline-radio2" class="form-check-label ">
+                                                <input type="radio" id="inline-radio2" name="inline-radios" value="option2" class="form-check-input" readonly><span class="badge badge-secondary">Beneficiario</span>
+                                            </label>
+                                            <label for="inline-radio3" class="form-check-label ">
+                                                <input type="radio" id="inline-radio3" name="inline-radios" value="option3" class="form-check-input" readonly><span class="badge badge-secondary">Otro</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row form-group">
+                                            <div class="form-check">
+                                                <div class="checkbox">
+                                                    <label for="PolizaPro1" class="form-check-label ">
+                                                        <input type="checkbox" id="PolizaPro1" name="PolizaPro1" value="PolizaPro1Check" class="form-check-input" checked readonly>Cuento con la documentación que lo acredita.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row form-group">
+                                            <div class="form-check">
+                                                <div class="checkbox">
+                                                    <label for="PolizaPro1" class="form-check-label ">
+                                                        <input type="checkbox" id="PolizaPro1" name="PolizaPro1" value="PolizaPro1Check" class="form-check-input" checked readonly>El depositante manifiesta bajo protesta de decir la verdad, que el producto consignado en los certificados de depósito y los recursos a almacenadora Banorte por la emisión del cretificado de depósito y Bono de prenda serán siempre de procedencia lícita y reconoce que almacenadora Banorte se encuentra obligado al cumplimiento de las disposiciones legales relativas al cumplimiento de acciones encaminadas a prevenir, detectar y reportar los actos, omisiones u operaciones que pudieran favorecer, auxiliar o cooperar para la comisión de los delitos de terrorismo y lavado de dinero. En consecuencia, el depositante deberá proporcionar a almacenadora Banorte los datos y documentos que almacenadora Banorte requiera para tal efecto.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><b>Producción</b></h4>
+                                            </div>
+                                            <hr />
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <div class="row form-group">
+                                                            <label for="selectCicloAgriPro" class="form-control-label">Ciclo Agricola:</label>
+                                                            <select name="selectCicloAgriPro" id="selectCicloAgriPro" class="form-control" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1" selected>Primavera-Verano</option>
+                                                                <option value="2">Perennes</option>
+                                                                <option value="3">Otoño-Invierno</option>
+                                                                <option value="4">Ciclos perennes</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="row form-group">
+                                                            <label for="inputAnoProPro" class="form-control-label">Año de producción:</label>
+                                                            <input type="text" id="inputAnoProPro" placeholder="2020" class="form-control" value="2021" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="row form-group">
+                                                            <label for="selectImpPro" class="form-control-label">Importado:</label>
+                                                            <select name="selectImpPro" id="selectImpPro" class="form-control" onchange="showPaisesCombo()" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1">SI</option>
+                                                                <option value="2" selected>NO</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divNoImportado" class="row">
+                                                    <div class="col-3">
+                                                        <div class="row form-group">
+                                                            <label for="selectEstadoPro" class="form-control-label">Estado:</label>
+                                                            <select name="selectEstadoPro" id="selectEstadoPro" class="form-control" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1" selected>Aguascalientes</option>
+                                                                <option value="2">Baja California</option>
+                                                                <option value="3">Baja California Sur</option>
+                                                                <option value="4">Campeche</option>
+                                                                <option value="5">Chihuahua</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row form-group">
+                                                            <label for="selectMunPro" class="form-control-label">Municipio:</label>
+                                                            <select name="selectMunPro" id="selectMunPro" class="form-control" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1">Aguascalientes</option>
+                                                                <option value="2" selected>Asientos</option>
+                                                                <option value="3">Calvillo</option>
+                                                                <option value="4">Cosio</option>
+                                                                <option value="5">Jesus Maria</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row form-group">
+                                                            <label for="selectLocPro" class="form-control-label">Localidad:</label>
+                                                            <select name="selectLocPro" id="selectLocPro" class="form-control" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1">Aguascalientes</option>
+                                                                <option value="2" selected>Asientos</option>
+                                                                <option value="3">Calvillo</option>
+                                                                <option value="4">Cosio</option>
+                                                                <option value="5">Jesus Maria</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row form-group">
+                                                            <label for="inputClaveInegiPro" class="form-control-label">Clave INEGI:</label>
+                                                            <input type="text" id="inputClaveInegiPro" placeholder="XXXXX" class="form-control" value="10020001" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divImportado" class="row" style="display:none">
+                                                    <div class="col-3">
+                                                        <div class="row form-group">
+                                                            <label for="selectPaisPro" class="form-control-label">País de origen:</label>
+                                                            <select name="selectPaisPro" id="selectPaisPro" class="form-control">
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1">Estados Unidos</option>
+                                                                <option value="2">China</option>
+                                                                <option value="3">Brasil</option>
+                                                                <option value="4">Canada</option>
+                                                                <option value="5">Belgica</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><b>Calidad</b></h4>
+                                            </div>
+                                            <hr />
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <div class="row form-group">
+                                                            <label for="inputAgropecPro" class="form-control-label">Agropecuario:</label>
+                                                            <input type="text" id="inputAgropecPro" placeholder="Sin aplicar" class="form-control" value="Sin aplicar" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="row form-group">
+                                                            <label for="inputPesquePro" class="form-control-label">Pesquero:</label>
+                                                            <input type="text" id="inputPesquePro" placeholder="Sin aplicar" class="form-control" value="Sin aplicar" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="row form-group">
+                                                            <label for="selectNormaPro" class="form-control-label">Norma:</label>
+                                                            <select name="selectNormaPro" id="selectNormaPro" class="form-control" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1">NMX-XX-000-0000-XXXX</option>
+                                                                <option value="2" selected>NMX-XX-111-1111-XXXX</option>
+                                                                <option value="3">NMX-XX-222-2222-XXXX</option>
+                                                                <option value="4">NMX-XX-333-3333-XXXX</option>
+                                                                <option value="5">NMX-XX-444-4444-XXXX</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="row form-group">
+                                                            <div class="form-check">
+                                                                <div class="checkbox">
+                                                                    <label for="PolizaPro1" class="form-check-label ">
+                                                                        <input type="checkbox" id="PolizaPro2" name="PolizaPro2" value="PolizaPro2Check" class="form-check-input" checked readonly>Considerando que todos los parámetros se encuentren dentro de dicha Norma y condicionado a la verificación de los mismos por almacenadora Banorte, el resultante de almacenadora Banorte se tomará como dato a certificar.
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><b>Certificado</b></h4>
+                                            </div>
+
+                                            <hr />
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="row form-group">
+                                                            <label for="selectTpCertPro" class="form-control-label">Tipo de certificado:</label>
+                                                            <select name="selectTpCertPro" id="selectTpCertPro" class="form-control" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1" selected>Negociable</option>
+                                                                <option value="2">No negociable</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="row form-group">
+                                                            <label for="selectBnPrendaPro" class="form-control-label">Bono de prenda:</label>
+                                                            <select name="selectBnPrendaPro" id="selectBnPrendaPro" class="form-control" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1" selected>SI</option>
+                                                                <option value="2">NO</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="row form-group">
+                                                            <label for="radioFechaVenPro" class="form-control-label">Fecha de vencimiento:</label>
+                                                            <div class="col-12">
+                                                                <div class="col-2">
+                                                                    <input type="radio" id="radioFechaVenPro" name="radioFechasPro" class="form-check-input" onchange="enableRadioPro()" readonly>
+                                                                </div>
+                                                                <div class="col-10">
+                                                                    <input type="date" id="inputFechaVenPro" class="form-control" disabled>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row form-group">
+                                                            <label for="radioDiaPro" class="form-control-label">Días:</label>
+                                                            <div class="col-12">
+                                                                <div class="col-2">
+                                                                    <input type="radio" id="radioDiaPro" name="radioFechasPro" class="form-check-input" checked onchange="enableRadioPro()" readonly>
+                                                                </div>
+                                                                <div class="col-10">
+                                                                    <input type="text" id="inputDiaPro" placeholder="31" class="form-control" value="31" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row form-group">
+                                                            <label for="inputVolPro" class="form-control-label">Volumen a certificar:</label>
+                                                            <input type="text" id="inputVolPro" placeholder="1,000,000.00" class="form-control" value="2,000" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row form-group">
+                                                            <label for="selectUnidadesPro" class="form-control-label">Unidades:</label>
+                                                            <select name="selectUnidadesPro" id="selectUnidadesPro" class="form-control" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="TON" selected>Tonelada</option>
+                                                                <option value="KG">Kilogramo</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <div class="row form-group">
+                                                            <label for="inputNoCEDEPro" class="form-control-label">Número de certificados a emitir:</label>
+                                                            <input type="number" id="inputNoCEDEPro" placeholder="1" class="form-control" value="1" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="col-12">
+                                                            <div class="row form-group">
+                                                                <label for="inputDivCEDEPro" class="form-control-label">Divididos en:</label>
+
+                                                                <div class="input-group">
+                                                                    <input type="number" id="inputDivCEDEPro" placeholder="1" class="form-control" readonly>
+                                                                    <div class="input-group-addon">-</div>
+                                                                    <div class="input-group-addon">+</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="row form-group">
+                                                            <label for="inputPrecPro" class="form-control-label">Precio:</label>
+                                                            <input type="text" id="inputPrecPro" placeholder="1.00" class="form-control" value="500,000.00" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4"></div>
+                                                    <div class="col-4" style="height: 250px;">
+                                                        <table id="tablaVolumenCert" class="table" style="width: 100%; display: inline-table;">
+                                                            <thead>
+                                                                <tr class="col-12">
+                                                                    <th class="col-4" scope="col">Cantidad</th>
+                                                                    <th class="col-4" scope="col">Unidad</th>
+                                                                    <th class="col-4" scope="col">Acción</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="tablaBodyVolumenCert" style="overflow-y: scroll; height: 250px;">
+                                                                <tr>
+                                                                    <td>2,000</td>
+                                                                    <td>TON</td>
+                                                                    <td><button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Dar de baja" disabled><i class="fa fa-trash"></i></button></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-4"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="row form-group">
+                                                            <label for="inputTotPrecPro" class="form-control-label">Total precio:</label>
+                                                            <input type="text" id="inputTotPrecPro" placeholder="$100.00" class="form-control" value="$500,000.00" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="row form-group">
+                                                            <label for="selectDivisaPro" class="form-control-label">Divisa:</label>
+                                                            <select name="selectDivisaPro" id="selectDivisaPro" class="form-control" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1" selected>MXP</option>
+                                                                <option value="2">USD</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="row form-group">
+                                                            <label for="inputNomPerCEDEPro" class="form-control-label">Certificados a favor de:</label>
+                                                            <input type="text" id="inputNomPerCEDEPro" placeholder="Pedro" class="form-control" value="Ximena Jímenez Balboa" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="row form-group">
+                                                            <label for="inputRFCCEDEPro" class="form-control-label">RFC:</label>
+                                                            <input type="text" id="inputRFCCEDEPro" placeholder="XXXX00000000XX" class="form-control" value="JIBX250689ES2" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="row form-group">
+                                                            <label for="inputDirCEDEPro" class="form-control-label">Con dirección:</label>
+                                                            <input type="text" id="inputDirCEDEPro" placeholder="Colonia de prueba, calle de prueba, entre calle de prueba 1 y calle de prueba 2" class="form-control" value="AV. ADOLFO LÓPEZ MATEOS COL. CENTRO" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="row form-group">
+                                                            <label for="selectSerPigPro" class="form-control-label">Serán Pignorados:</label>
+                                                            <select name="selectSerPigPro" id="selectSerPigPro" class="form-control" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1" selected>SI</option>
+                                                                <option value="2">NO</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="row form-group">
+                                                            <label for="inputInstFinPro" class="form-control-label">Institucuón Financiera:</label>
+                                                            <input type="text" id="inputInstFinPro" placeholder="Institución Financiera X" class="form-control" value="Institución Financiera SA de CV" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <div class="row form-group">
+                                                            Los certificados emitidos serán pignorados o reportados para obtener recursos y dichos recursos serán utilizados al 100% para cubrir el pago a productores.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="row form-group">
+                                                            <label for="selectPoliza3Pro" class="form-control-label">Serán Pignorados:</label>
+                                                            <select name="selectPoliza3Pro" id="selectPoliza3Pro" class="form-control" disabled>
+                                                                <option value="0">Seleccione una opción</option>
+                                                                <option value="1" selected>SI</option>
+                                                                <option value="2">NO</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <input type="checkbox" id="PolizaPro4" name="PolizaPro4" value="PolizaPro4Check" class="form-check-input" checked readonly>Enviar confirmación de la Institución Financiera, Empresa Persona y Datos de Contacto con quien pignore o negocien el (los) certificados, o en su caso si no fueron negociados o pignorados.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="custom-nav-poliza" role="tabpanel" aria-labelledby="custom-nav-poliza-tab">
+
+                        <div class="card">
+                            <div class="card-header"><b>Póliza y Cobertura</b></div>
+                            <div class="card-body card-block">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row form-group">
+                                            <label for="selectPregCobPol" class="form-control-label">La mercancía cuenta con mecanismos de cobertura de precios:</label>
+                                            <select name="selectPregCobPol" id="selectPregCobPol" class="form-control" disabled>
+                                                <option value="0">Seleccione una opción</option>
+                                                <option value="1">SI</option>
+                                                <option value="2" selected>NO</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row form-group">
+                                            <label for="inputPregCualPol" class="form-control-label">Cual:</label>
+                                            <input type="text" id="inputPregCualPol" placeholder="Cobertura X" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row form-group">
+                                            <label for="selectPregPolPol" class="form-control-label">Poliza de seguro: Mercancía amparada con seguro contra incendio:</label>
+                                            <select name="selectPregPolPol" id="selectPregPolPol" class="form-control" disabled>
+                                                <option value="0">Seleccione una opción</option>
+                                                <option value="1" selected>SI</option>
+                                                <option value="2">NO</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row form-group">
+                                            <label for="selectTpPolPol" class="form-control-label">Tipo de póliza:</label>
+                                            <select name="selectTpPolPol" id="selectTpPolPol" class="form-control" disabled>
+                                                <option value="0">Seleccione una opción</option>
+                                                <option value="1" selected>Cliente</option>
+                                                <option value="2">Cliente-Almacen</option>
+                                                <option value="3">Almacenadora Banorte</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row form-group">
+                                            <label for="inputPólizaPol" class="form-control-label">Póliza:</label>
+                                            <input type="text" id="inputPólizaPol" placeholder="00000000000000" class="form-control" value="0089508608008" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row form-group">
+                                            <label for="inputNomAseguradoraPol" class="form-control-label">Nombre de aseguradora:</label>
+                                            <input type="text" id="inputNomAseguradoraPol" placeholder="Grupo de aseguradoras X" class="form-control" value="Grupo de Aseguradoras SA de CV" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row form-group">
+                                            <label for="inputVencPolPol" class="form-control-label">Vencimiento:</label>
+                                            <input type="date" id="inputVencPolPol" class="form-control" data-date-format="DD-MM-YYYY" value="2024-07-25" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="alert alert-primary" role="alert">
+                                            Si escoge una oficina de impresión no es necesario poner una dirección y se recogerán directamente en la oficina, en caso contrario si escoge una dirección en específico no será necesario asignar una oficina de impresión.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row form-group">
+                                            <label for="radioOfiImprePol" class="form-control-label">Oficina de impresión:</label>
+                                            <div class="col-12">
+                                                <div class="radio">
+                                                    <div class="col-1">
+                                                        <input type="radio" id="radioOfiImprePol" name="radioDirPol" class="form-check-input" checked onchange="enableRadioPol()" readonly>
+                                                    </div>
+                                                    <div class="col-11">
+                                                        <select name="selectOfiImprePol" id="selectOfiImprePol" class="form-control" disabled>
+                                                            <option value="0">Seleccione una opción</option>
+                                                            <option value="1" selected>Santa Fe</option>
+                                                            <option value="2">Torre Mayor</option>
+                                                            <option value="3">Torre Koi</option>
+                                                            <option value="3">Torre Sur</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row form-group">
+                                            <label for="radioDomPol" class="form-control-label">Dichos certificados deberán ser enregados en el domicilio:</label>
+                                            <div class="col-12">
+                                                <div class="radio">
+                                                    <div class="col-1">
+                                                        <input type="radio" id="radioDomPol" name="radioDirPol" class="form-check-input" onchange="enableRadioPol()" readonly>
+                                                    </div>
+                                                    <div class="col-11">
+                                                        <input type="text" id="inputDomPol" placeholder="" class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div id="divOfiEmiPol" class="row form-group">
+                                            <label for="selectOfiEmiPol" class="form-control-label">Oficina de emisión:</label>
+                                            <select name="selectOfiEmiPol" id="selectOfiEmiPol" class="form-control" disabled>
+                                                <option value="0">Seleccione una opción</option>
+                                                <option value="1" selected>Santa Fe</option>
+                                                <option value="2">Torre Mayor</option>
+                                                <option value="3">Torre Koi</option>
+                                                <option value="3">Torre Sur</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row form-group">
+                                            <label for="inputEncargadoAtePol" class="form-control-label">En atención:</label>
+                                            <input type="text" id="inputEncargadoAtePol" placeholder="Licenciado" class="form-control" value="Licenciado" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="textareaObs" class=" form-control-label">Observaciones adicionales</label>
+                                        <textarea name="textareaObs" id="textareaObs" rows="9" placeholder="Sin obervaciones adicionales" class="form-control" readonly></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row form-group">
+                                            <div class="form-check">
+                                                <div class="checkbox">
+                                                    <label for="PolizaPro1" class="form-check-label ">
+                                                        <input type="checkbox" id="PolizaPro2" name="PolizaPro2" value="PolizaPro2Check" class="form-check-input" checked readonly>Bajo protesta de decir verdad, los certificados emitidos serán pignorados o reporteados para obtener recursos y dichos recursos serán utilizados al 100% para cubrir el pago a productos. Si bajo protesta de decir verdad declaro que los datos asentados en esta solicitud son verídicos y cuento con la documentación necesaria para acreditarlo, la cual presentare en caso de ser requeridos.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row form-group">
+                                            <div class="form-check">
+                                                <div class="checkbox">
+                                                    <label for="PolizaPro1" class="form-check-label ">
+                                                        <input type="checkbox" id="PolizaPro2" name="PolizaPro2" value="PolizaPro2Check" class="form-check-input" checked readonly>La Facturación no se podrá realizar a terceros sin vínculo contractual con almacenadora Banorte en cumplimiento de las disposiciones de carácter general del Art. 95 de la LGOAAC.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row form-group">
+                                            <label for="inputNomFirmaPol" class="form-control-label">Nombre de quien va a firmar:</label>
+                                            <input type="text" id="inputNomFirmaPol" placeholder="Nombre Persona Comun" class="form-control" value="Francisco Hernández Pérez" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="custom-nav-autorizacion" role="tabpanel" aria-labelledby="custom-nav-autorizacion-tab" style="display:none">
+                        <div class="card">
+                            <div class="card-header"><b>Autorización y Rechazo</b></div>
+                            <div class="card-body card-block">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="row form-group">
+                                            <label class=" form-control-label">Cliente:&nbsp;</label>
+                                            <p class="form-control-static"><b>Sofía Hernández</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row form-group">
+                                            <label class=" form-control-label">Monto Total:&nbsp;</label>
+                                            <p class="form-control-static"><b>$500,000.00</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row form-group">
+                                            <label class=" form-control-label">Folio:&nbsp;</label>
+                                            <p class="form-control-static"><b>F00000000X</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <button type="button" id="btnRechazar" style="display:none" class="btn btn-danger btn-flat m-b-30 m-t-30 w-100"> Rechazar</button>
+                                    </div>
+                                    <div class="col-8"></div>
+                                    <div class="col-2">
+                                        <button type="button" id="btnAutorizar" style="display:none" class="btn btn-success btn-flat m-b-30 m-t-30 w-100"> Autorizar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button type="button" id="btnAtras" style="display:none; float:right" class="btn btn-primary btn-flat m-b-30 m-t-30 float-left"> Atras</button>
+                    <button type="button" id="btnSiguiente" style="display:block; float:left" class="btn btn-primary btn-flat m-b-30 m-t-30 float-right"> Siguiente</button>
+                </div>
+                <!--<button type="button" id="btnFinalizar" class="btn btn-success btn-flat m-b-30 m-t-30"> Salir</button>-->
+            </div>
+
+            <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mediumModalLabel">Rechazar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="textareaRech" class=" form-control-label">Motivo de rechazo:</label>
+                                    <textarea name="textareaRech" id="textareaRech" rows="9" placeholder="Motivo de rechazo" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <button type="button" id="btnMotivoRechazar" class="btn btn-success" data-dismiss="modal">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+
+    <div class="clearfix"></div>
+
+    <script src="~/js/lib/Site/ver_solicitud_emision.js"></script>
